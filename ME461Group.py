@@ -91,6 +91,7 @@ class ME461Group:
             if (max_neighbour == 0) or ((xtarget <= 0) or (ytarget <= 0) or (xtarget >= 750) or (ytarget >= 750)):
                 xtarget = 350
                 ytarget = 350
+            coordslist = [[y,xtarget],[ytarget,xtarget]]
         else:
             sample = newMap
             sample[0,0], sample[np.shape(sample)[0]-3,np.shape(sample)[1]-3], sample[0,np.shape(sample)[1]-1], sample[np.shape(sample)[0]-1,0], sample[np.shape(sample)[0]-1,np.shape(sample)[1]-1] = 0, 0, 0, 0, 0
@@ -117,11 +118,11 @@ class ME461Group:
             xtarget = x + dx
             ytarget = y + dy
 
-        coords = astar(sample,(yonepix,xonepix),(index[0][0],index[1][0]), max_neighbour)
-        coordslist = []
-        for i in coords:
-          new_list = [(j * 50)-75 for j in i ]
-          coordslist.append(list(new_list))
+            coords = astar(sample,(yonepix,xonepix),(index[0][0],index[1][0]), max_neighbour)
+            coordslist = []
+            for i in coords:
+              new_list = [(j * 50)-75 for j in i ]
+              coordslist.append(list(new_list))
 
         return coordslist
 
