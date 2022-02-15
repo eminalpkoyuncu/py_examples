@@ -1,21 +1,8 @@
 import numpy as np
 import time
+
 class ME461Group:
-    '''
-    This is the random player used in the colab example.
-    Edit this file properly to turn it into your submission or generate a similar file that has the same minimal class structure.
-    You have to replace the name of the class (ME461Group) with one of the following (exactly as given below) to match your group name
-        atlas
-        backspacex
-        ducati
-        hepsi1
-        mechrix
-        meturoam
-        nebula
-        ohmygroup
-        tulumba
-    After you edit this class, save it as groupname.py where groupname again is exactly one of the above
-    '''
+
     def __init__(self, userName, clrDictionary, maxStepSize, maxTime):
         self.name = userName # your object will be given a user name, i.e. your group name
         self.maxStep = maxStepSize # maximum length of the returned path from run()
@@ -129,10 +116,16 @@ class ME461Group:
 
             xtarget = x + dx
             ytarget = y + dy
-            coords = astar(sample,(yonepix,xonepix),(ytarget,xtarget))
-        return coords
+
+        coords = astar(sample,(yonepix,xonepix),(index[0][0],index[1][0]), max_neighbour)
+        coordslist = []
+        for i in coords:
+          coordslist.append(list(i))
+
+        return coordslist
 
 class Node():
+    """A node class for A* Pathfinding"""
 
     def __init__(self, parent=None, position=None):
         self.parent = parent
@@ -146,7 +139,7 @@ class Node():
         return self.position == other.position
 
 
-def astar(maze, start, end):
+def astar(maze, start, end, endvalue):
     """Returns a list of tuples as a path from the given start to the given end in the given maze"""
 
     # Create start and end node
@@ -198,7 +191,7 @@ def astar(maze, start, end):
                 continue
 
             # Make sure walkable terrain
-            if maze[node_position[0]][node_position[1]] != -1:
+            if (maze[node_position[0]][node_position[1]] != 0) and (maze[node_position[0]][node_position[1]] != endvalue):
                 continue
 
             # Create new node
@@ -216,8 +209,8 @@ def astar(maze, start, end):
                     continue
 
             # Create the f, g, and h values
-            child.g = current_node.g + cost_array[child.position[0],child.position[1]] #Calculate g function for each neighbour with its cost
-            child.h = ((child.position[0] - end_node.position[0]) ** 2) + ((child.position[1] - end_node.position[1]) ** 2)*mean_cost
+            child.g = current_node.g + 1
+            child.h = abs((child.position[0] - end_node.position[0])) + abs((child.position[1] - end_node.position[1]))
             child.f = child.g + child.h
 
             # Child is already in the open list
@@ -227,4 +220,3 @@ def astar(maze, start, end):
 
             # Add the child to the open list
             open_list.append(child)
-
