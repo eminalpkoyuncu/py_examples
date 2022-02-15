@@ -20,7 +20,7 @@ class ME461Group:
         self.name = userName # your object will be given a user name, i.e. your group name
         self.maxStep = maxStepSize # maximum length of the returned path from run()
         self.maxTime = maxTime # run() is supposed to return before maxTime
-
+        self.clrDictionary = clrDictionary
 
     def run(self, img, info):
         myinfo = info[self.name]
