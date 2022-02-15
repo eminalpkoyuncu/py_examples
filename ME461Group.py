@@ -116,14 +116,15 @@ class ME461Group:
 
             dy = (index[0][0]-np.shape(sample)[0]+3)*50
             dx = (index[1][0]-np.shape(sample)[1]+3)*50
-            
+            xtarget = x + dx
+            ytarget = y + dy            
             if ytarget <= 0:
                 dy = 50
-            elif ytarget >= 750:  
+            if ytarget >= 750:  
                 dy = -50
-            elif xtarget <= 0:
+            if xtarget <= 0:
                 dx = 50
-            elif xtarget >= 750:
+            if xtarget >= 750:
                 dx = -50
                 
             xtarget = x + dx
