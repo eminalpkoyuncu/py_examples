@@ -46,37 +46,37 @@ class ME461Group:
         yonepix,xonepix = y//50,x//50
         # a very simple randomizer
         maxL = self.maxStep # total travel
-        newMap = np.zeros((15,15),dtype=int)
+        newMap = np.zeros((19,19),dtype=int)
         for i in range(7):
             for j in range(7):
                 if img[75+100*i,75+100*j,0] == colorz['clr100'][0][0] and img[75+100*i,75+100*j,1] == colorz['clr100'][0][1] and img[75+100*i,75+100*j,2] == colorz['clr100'][0][2]:
-                    newMap[2*i+1,2*j+1] = colorz['clr100'][1]
+                    newMap[2*i+3,2*j+3] = colorz['clr100'][1]
                 elif img[75+100*i,75+100*j,0] == colorz['clr50'][0][0] and img[75+100*i,75+100*j,1] == colorz['clr50'][0][1] and img[75+100*i,75+100*j,2] == colorz['clr50'][0][2]:
-                    newMap[2*i+1,2*j+1] = colorz['clr50'][1]
+                    newMap[2*i+3,2*j+3] = colorz['clr50'][1]
                 elif img[75+100*i,75+100*j,0] == colorz['clr30'][0][0] and img[75+100*i,75+100*j,1] == colorz['clr30'][0][1] and img[75+100*i,75+100*j,2] == colorz['clr30'][0][2]:
-                    newMap[2*i+1,2*j+1] = colorz['clr30'][1]
+                    newMap[2*i+3,2*j+3] = colorz['clr30'][1]
                 elif img[75+100*i,75+100*j,0] == colorz['clr20'][0][0] and img[75+100*i,75+100*j,1] == colorz['clr20'][0][1] and img[75+100*i,75+100*j,2] == colorz['clr20'][0][2]:
-                    newMap[2*i+1,2*j+1] = colorz['clr20'][1]
+                    newMap[2*i+3,2*j+3] = colorz['clr20'][1]
                 elif img[75+100*i,75+100*j,0] == colorz['clr10'][0][0] and img[75+100*i,75+100*j,1] == colorz['clr10'][0][1] and img[75+100*i,75+100*j,2] == colorz['clr10'][0][2]:
-                    newMap[2*i+1,2*j+1] = colorz['clr10'][1]
+                    newMap[2*i+3,2*j+3] = colorz['clr10'][1]
                 elif img[75+100*i,75+100*j,0] == colorz['clr9'][0][0] and img[75+100*i,75+100*j,1] == colorz['clr9'][0][1] and img[75+100*i,75+100*j,2] == colorz['clr9'][0][2]:
-                    newMap[2*i+1,2*j+1] = colorz['clr9'][1]
+                    newMap[2*i+3,2*j+3] = colorz['clr9'][1]
                 elif img[75+100*i,75+100*j,0] == colorz['clr8'][0][0] and img[75+100*i,75+100*j,1] == colorz['clr8'][0][1] and img[75+100*i,75+100*j,2] == colorz['clr8'][0][2]:
-                    newMap[2*i+1,2*j+1] = colorz['clr8'][1]
+                    newMap[2*i+3,2*j+3] = colorz['clr8'][1]
                 elif img[75+100*i,75+100*j,0] == colorz['clr7'][0][0] and img[75+100*i,75+100*j,1] == colorz['clr7'][0][1] and img[75+100*i,75+100*j,2] == colorz['clr7'][0][2]:
-                    newMap[2*i+1,2*j+1] = colorz['clr7'][1]
+                    newMap[2*i+3,2*j+3] = colorz['clr7'][1]
                 elif img[75+100*i,75+100*j,0] == colorz['clr6'][0][0] and img[75+100*i,75+100*j,1] == colorz['clr6'][0][1] and img[75+100*i,75+100*j,2] == colorz['clr6'][0][2]:
-                    newMap[2*i+1,2*j+1] = colorz['clr6'][1]
+                    newMap[2*i+3,2*j+3] = colorz['clr6'][1]
                 elif img[75+100*i,75+100*j,0] == colorz['clr5'][0][0] and img[75+100*i,75+100*j,1] == colorz['clr5'][0][1] and img[75+100*i,75+100*j,2] == colorz['clr5'][0][2]:
-                    newMap[2*i+1,2*j+1] = colorz['clr5'][1]
+                    newMap[2*i+3,2*j+3] = colorz['clr5'][1]
                 elif img[75+100*i,75+100*j,0] == colorz['clr4'][0][0] and img[75+100*i,75+100*j,1] == colorz['clr4'][0][1] and img[75+100*i,75+100*j,2] == colorz['clr4'][0][2]:
-                    newMap[2*i+1,2*j+1] = colorz['clr4'][1]
+                    newMap[2*i+3,2*j+3] = colorz['clr4'][1]
                 elif img[75+100*i,75+100*j,0] == colorz['clr3'][0][0] and img[75+100*i,75+100*j,1] == colorz['clr3'][0][1] and img[75+100*i,75+100*j,2] == colorz['clr3'][0][2]:
-                    newMap[2*i+1,2*j+1] = colorz['clr3'][1]
+                    newMap[2*i+3,2*j+3] = colorz['clr3'][1]
                 elif img[75+100*i,75+100*j,0] == colorz['clr2'][0][0] and img[75+100*i,75+100*j,1] == colorz['clr2'][0][1] and img[75+100*i,75+100*j,2] == colorz['clr2'][0][2]:
-                    newMap[2*i+1,2*j+1] = colorz['clr2'][1]
+                    newMap[2*i+3,2*j+3] = colorz['clr2'][1]
                 elif img[75+100*i,75+100*j,0] == colorz['clr1'][0][0] and img[75+100*i,75+100*j,1] == colorz['clr1'][0][1] and img[75+100*i,75+100*j,2] == colorz['clr1'][0][2]:
-                    newMap[2*i+1,2*j+1] = colorz['clr1'][1]
+                    newMap[2*i+3,2*j+3] = colorz['clr1'][1]
         num_neighbor = 2
 
         left = max(0,yonepix-num_neighbor)
