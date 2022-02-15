@@ -352,14 +352,14 @@ class LetsPlayAGame():
             if self.Players[pk][-1] > 0:
                 tStart = time.perf_counter()
                 signal.setitimer(signal.ITIMER_REAL, timeout_for_players)
-                path = player.run(self.maze, info)
-                '''
+                #path = player.run(self.maze, info)
+                
                 try:
                     path = player.run(self.maze, info)
                 except Exception as e:
                     print(f'{pk} failed!!!\n')
                     path = []
-                '''   
+                   
                 signal.setitimer(signal.ITIMER_REAL, timeout_for_game)
                 tExec = time.perf_counter() - tStart
                 # log result for the current player, -1 is number of pixels to cover and to be updated later
