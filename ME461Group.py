@@ -43,7 +43,7 @@ class ME461Group:
         imS = img.shape[0] # assume square image and get size
         loc, game_point = info[self.name]
         y,x = loc # get current y,x coordinates
-        yonepix,xonepix = y//50,x//50
+        yonepix,xonepix = y//50+2,x//50+2
         # a very simple randomizer
         maxL = self.maxStep # total travel
         newMap = np.zeros((19,19),dtype=int)
