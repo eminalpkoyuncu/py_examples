@@ -66,7 +66,7 @@ for d in range(10):
 # set up timers to limit execution time for run() function calls
 # setting timeout values for players and game engine
 timeout_for_game = 1e6
-timeout_for_players = 30
+timeout_for_players = 0.2
 
 # for alarm handling, timeout handler function is defined
 def timeout_handler(sign, fr):
