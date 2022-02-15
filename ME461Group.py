@@ -77,5 +77,6 @@ class ME461Group:
         dy = (index[1][0]-2)*50
         xtarget = x + dx
         ytarget = y + dy
+        print(self.clrDictionary)
         return[[y,xtarget],[ytarget,xtarget]]
 
