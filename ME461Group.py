@@ -129,7 +129,7 @@ class ME461Group:
 
             xtarget = x + dx
             ytarget = y + dy
-            coords = list(astar(sample,(yonepix,xonepix),(ytarget,xtarget)))
+            coords = astar(sample,(yonepix,xonepix),(ytarget,xtarget))
         return coords
 
 class Node():
