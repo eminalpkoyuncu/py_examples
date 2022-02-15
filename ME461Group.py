@@ -70,11 +70,11 @@ class ME461Group:
         top = max(0,xonepix+num_neighbor+1)
 
         sample = newMap[left:right,bottom:top]
-        sample[0,0], sample[2,2], sample[0,4], sample[4,0], sample[4,4] = 0, 0, 0, 0, 0
+        sample[0,0], sample[2,2], sample[0,np.shape(sample)[1]-1], sample[np.shape(sample)[0]-1,0], sample[np.shape(sample)[0]-1,np.shape(sample)[1]-1] = 0, 0, 0, 0, 0
         max_neighbour = np.max(sample)
         index = np.where(sample == max_neighbour)
-        dx = (index[0][0]-2)*50
-        dy = (index[1][0]-2)*50
+        dy = (index[0][0]-int((np.shape(sample)[0]-1)/2))*50
+        dx = (index[1][0]-int((np.shape(sample)[1]-1)/2))*50
         xtarget = x + dx
         ytarget = y + dy
         print(self.clrDictionary)
