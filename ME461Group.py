@@ -91,7 +91,11 @@ class ME461Group:
         index = np.where(sample == max_neighbour)
         dy = (index[0][0]-np.shape(sample)[0]+3)*50
         dx = (index[1][0]-np.shape(sample)[1]+3)*50
-
         xtarget = x + dx
-        ytarget = y + dy
+        ytarget = y + dy        
+        
+        if (max_neighbour == 0) or ((xtarget <= 0) or (ytarget <= 0) or (xtarget >= 750) or (ytarget >= 750)):
+            xtarget = 350
+            ytarget = 350              
+            
         return[[y,xtarget],[ytarget,xtarget]]
