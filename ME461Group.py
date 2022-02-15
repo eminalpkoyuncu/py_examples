@@ -25,10 +25,10 @@ class ME461Group:
         colorz = {
         'black':((1,1,1), 0, 13),
         'clr100':((225, 1, 1), 100, 1),
-        'clr50':((1, 255, 1), 50, 2), 
+        'clr50':((1, 255, 1), 50, 2),
         'clr30':((1, 1, 255), 30, 2),
         'clr20':((200, 200, 1), 20, 2),
-        'clr10':((255, 1, 255), 10, 2), 
+        'clr10':((255, 1, 255), 10, 2),
         'clr9':((1, 255, 255), 9, 3),
         'clr8':((1,1,150), 8, 3),
         'clr7':((120,120,40), 7, 3),
@@ -77,7 +77,7 @@ class ME461Group:
                     newMap[2*i+3,2*j+3] = colorz['clr2'][1]
                 elif img[75+100*i,75+100*j,0] == colorz['clr1'][0][0] and img[75+100*i,75+100*j,1] == colorz['clr1'][0][1] and img[75+100*i,75+100*j,2] == colorz['clr1'][0][2]:
                     newMap[2*i+3,2*j+3] = colorz['clr1'][1]
-                    
+
         if game_point > 100:
             num_neighbor = 2
 
@@ -90,7 +90,7 @@ class ME461Group:
             sample = newMap[left:right,bottom:top]
             sample[0,0], sample[np.shape(sample)[0]-3,np.shape(sample)[1]-3], sample[0,np.shape(sample)[1]-1], sample[np.shape(sample)[0]-1,0], sample[np.shape(sample)[0]-1,np.shape(sample)[1]-1] = 0, 0, 0, 0, 0
 
-            sample = np.where(sample > game_point, -1, sample)        
+            sample = np.where(sample > game_point, -1, sample)
             max_neighbour = np.max(sample)
 
 
@@ -99,35 +99,132 @@ class ME461Group:
             dy = (index[0][0]-np.shape(sample)[0]+3)*50
             dx = (index[1][0]-np.shape(sample)[1]+3)*50
             xtarget = x + dx
-            ytarget = y + dy        
+            ytarget = y + dy
 
             if (max_neighbour == 0) or ((xtarget <= 0) or (ytarget <= 0) or (xtarget >= 750) or (ytarget >= 750)):
                 xtarget = 350
-                ytarget = 350              
+                ytarget = 350
         else:
             sample = newMap
             sample[0,0], sample[np.shape(sample)[0]-3,np.shape(sample)[1]-3], sample[0,np.shape(sample)[1]-1], sample[np.shape(sample)[0]-1,0], sample[np.shape(sample)[0]-1,np.shape(sample)[1]-1] = 0, 0, 0, 0, 0
 
-            sample = np.where(sample > game_point, -1, sample)        
+            sample = np.where(sample > game_point, -1, sample)
             max_neighbour = np.max(sample)
-    
+
 
             index = np.where(sample == max_neighbour)
 
             dy = (index[0][0]-yonepix)*50
             dx = (index[1][0]-xonepix)*50
             xtarget = x + dx
-            ytarget = y + dy            
+            ytarget = y + dy
             if ytarget <= 0:
                 dy = 50
-            if ytarget >= 750:  
+            if ytarget >= 750:
                 dy = -50
             if xtarget <= 0:
                 dx = 50
             if xtarget >= 750:
                 dx = -50
-                
+
             xtarget = x + dx
             ytarget = y + dy
-            
-        return[[y,xtarget],[ytarget,xtarget]]
+            coords = list(astar(sample,(yonepix,xonepix),(ytarget,xtarget)))
+        return coords
+
+class Node():
+
+    def __init__(self, parent=None, position=None):
+        self.parent = parent
+        self.position = position
+
+        self.g = 0
+        self.h = 0
+        self.f = 0
+
+    def __eq__(self, other):
+        return self.position == other.position
+
+
+def astar(maze, start, end):
+    """Returns a list of tuples as a path from the given start to the given end in the given maze"""
+
+    # Create start and end node
+    start_node = Node(None, start)
+    start_node.g = start_node.h = start_node.f = 0
+    end_node = Node(None, end)
+    end_node.g = end_node.h = end_node.f = 0
+
+    # Initialize both open and closed list
+    open_list = []
+    closed_list = []
+
+    # Add the start node
+    open_list.append(start_node)
+
+    # Loop until you find the end
+    while len(open_list) > 0:
+
+        # Get the current node
+        current_node = open_list[0]
+        current_index = 0
+        for index, item in enumerate(open_list):
+            if item.f < current_node.f:
+                current_node = item
+                current_index = index
+
+        # Pop current off open list, add to closed list
+        open_list.pop(current_index)
+        closed_list.append(current_node)
+
+        # Found the goal
+        if current_node == end_node:
+            path = []
+            current = current_node
+            while current is not None:
+                path.append(current.position)
+                current = current.parent
+            return path[::-1] # Return reversed path
+
+        # Generate children
+        children = []
+        for new_position in [(0, -1), (0, 1), (-1, 0), (1, 0)]: # Adjacent squares
+
+            # Get node position
+            node_position = (current_node.position[0] + new_position[0], current_node.position[1] + new_position[1])
+
+            # Make sure within range
+            if node_position[0] > (len(maze) - 1) or node_position[0] < 0 or node_position[1] > (len(maze[len(maze)-1]) -1) or node_position[1] < 0:
+                continue
+
+            # Make sure walkable terrain
+            if maze[node_position[0]][node_position[1]] != -1:
+                continue
+
+            # Create new node
+            new_node = Node(current_node, node_position)
+
+            # Append
+            children.append(new_node)
+
+        # Loop through children
+        for child in children:
+
+            # Child is on the closed list
+            for closed_child in closed_list:
+                if child == closed_child:
+                    continue
+
+            # Create the f, g, and h values
+            child.g = current_node.g + cost_array[child.position[0],child.position[1]] #Calculate g function for each neighbour with its cost
+            child.h = ((child.position[0] - end_node.position[0]) ** 2) + ((child.position[1] - end_node.position[1]) ** 2)*mean_cost
+            child.f = child.g + child.h
+
+            # Child is already in the open list
+            for open_node in open_list:
+                if child == open_node and child.g > open_node.g:
+                    continue
+
+            # Add the child to the open list
+            open_list.append(child)
+
