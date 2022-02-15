@@ -77,30 +77,46 @@ class ME461Group:
                     newMap[2*i+3,2*j+3] = colorz['clr2'][1]
                 elif img[75+100*i,75+100*j,0] == colorz['clr1'][0][0] and img[75+100*i,75+100*j,1] == colorz['clr1'][0][1] and img[75+100*i,75+100*j,2] == colorz['clr1'][0][2]:
                     newMap[2*i+3,2*j+3] = colorz['clr1'][1]
-        num_neighbor = 2
+                    
+        if game_point > 100:
+            num_neighbor = 2
 
-        left = max(0,yonepix-num_neighbor)
-        right = max(0,yonepix+num_neighbor+1)
+            left = max(0,yonepix-num_neighbor)
+            right = max(0,yonepix+num_neighbor+1)
 
-        bottom = max(0,xonepix-num_neighbor)
-        top = max(0,xonepix+num_neighbor+1)
+            bottom = max(0,xonepix-num_neighbor)
+            top = max(0,xonepix+num_neighbor+1)
 
-        sample = newMap[left:right,bottom:top]
-        sample[0,0], sample[np.shape(sample)[0]-3,np.shape(sample)[1]-3], sample[0,np.shape(sample)[1]-1], sample[np.shape(sample)[0]-1,0], sample[np.shape(sample)[0]-1,np.shape(sample)[1]-1] = 0, 0, 0, 0, 0
-        
-        sample = np.where(sample > game_point, -1, sample)        
-        max_neighbour = np.max(sample)
-            
+            sample = newMap[left:right,bottom:top]
+            sample[0,0], sample[np.shape(sample)[0]-3,np.shape(sample)[1]-3], sample[0,np.shape(sample)[1]-1], sample[np.shape(sample)[0]-1,0], sample[np.shape(sample)[0]-1,np.shape(sample)[1]-1] = 0, 0, 0, 0, 0
 
-        index = np.where(sample == max_neighbour)
-        
-        dy = (index[0][0]-np.shape(sample)[0]+3)*50
-        dx = (index[1][0]-np.shape(sample)[1]+3)*50
-        xtarget = x + dx
-        ytarget = y + dy        
-        
-        if (max_neighbour == 0) or ((xtarget <= 0) or (ytarget <= 0) or (xtarget >= 750) or (ytarget >= 750)):
-            xtarget = 350
-            ytarget = 350              
+            sample = np.where(sample > game_point, -1, sample)        
+            max_neighbour = np.max(sample)
+
+
+            index = np.where(sample == max_neighbour)
+
+            dy = (index[0][0]-np.shape(sample)[0]+3)*50
+            dx = (index[1][0]-np.shape(sample)[1]+3)*50
+            xtarget = x + dx
+            ytarget = y + dy        
+
+            if (max_neighbour == 0) or ((xtarget <= 0) or (ytarget <= 0) or (xtarget >= 750) or (ytarget >= 750)):
+                xtarget = 350
+                ytarget = 350              
+        else:
+            sample = newMap
+            sample[0,0], sample[np.shape(sample)[0]-3,np.shape(sample)[1]-3], sample[0,np.shape(sample)[1]-1], sample[np.shape(sample)[0]-1,0], sample[np.shape(sample)[0]-1,np.shape(sample)[1]-1] = 0, 0, 0, 0, 0
+
+            sample = np.where(sample > game_point, -1, sample)        
+            max_neighbour = np.max(sample)
+
+
+            index = np.where(sample == max_neighbour)
+
+            dy = (index[0][0]-np.shape(sample)[0]+3)*50
+            dx = (index[1][0]-np.shape(sample)[1]+3)*50
+            xtarget = x + dx
+            ytarget = y + dy            
             
         return[[y,xtarget],[ytarget,xtarget]]
