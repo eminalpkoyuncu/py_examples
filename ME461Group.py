@@ -30,7 +30,7 @@ class ME461Group:
         yonepix,xonepix = y//50,x//50
         # a very simple randomizer
         maxL = self.maxStep # total travel
-        newMap = np.zeros(15,15,dtype=int)
+        newMap = np.zeros((15,15),dtype=int)
         for i in range(7):
             for j in range(7):
                 if img[75+100*i,75+100*j,0] == self.clrDictionary['clr100'][0][0] and img[75+100*i,75+100*j,1] == self.clrDictionary['clr100'][0][1] and img[75+100*i,75+100*j,2] == self.clrDictionary['clr100'][0][2]:
