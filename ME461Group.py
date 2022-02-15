@@ -119,8 +119,16 @@ class ME461Group:
             xtarget = x + dx
             ytarget = y + dy  
             
-            if (max_neighbour == 0) or ((xtarget <= 0) or (ytarget <= 0) or (xtarget >= 750) or (ytarget >= 750)):
-                xtarget = 350
-                ytarget = 350             
+            if ytarget <= 0:
+                dy = 50
+            elif ytarget >= 750:  
+                dy = -50
+            elif xtarget <= 0:
+                dx = 50
+            elif xtarget >= 750:
+                dx = -50
+                
+            xtarget = x + dx
+            ytarget = y + dy
             
         return[[y,xtarget],[ytarget,xtarget]]
