@@ -87,8 +87,13 @@ class ME461Group:
 
         sample = newMap[left:right,bottom:top]
         sample[0,0], sample[np.shape(sample)[0]-3,np.shape(sample)[1]-3], sample[0,np.shape(sample)[1]-1], sample[np.shape(sample)[0]-1,0], sample[np.shape(sample)[0]-1,np.shape(sample)[1]-1] = 0, 0, 0, 0, 0
+        
+        sample = np.where(sample > game_points, -1, sample)        
         max_neighbour = np.max(sample)
+            
+
         index = np.where(sample == max_neighbour)
+        
         dy = (index[0][0]-np.shape(sample)[0]+3)*50
         dx = (index[1][0]-np.shape(sample)[1]+3)*50
         xtarget = x + dx
