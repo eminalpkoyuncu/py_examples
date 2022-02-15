@@ -89,8 +89,8 @@ class ME461Group:
             ytarget = y + dy
 
             if (max_neighbour == 0) or ((xtarget <= 0) or (ytarget <= 0) or (xtarget >= 750) or (ytarget >= 750)):
-                xtarget = 350
-                ytarget = 350
+                xtarget = 375
+                ytarget = 375
             coordslist = [[y,xtarget],[ytarget,xtarget]]
         else:
             sample = newMap
