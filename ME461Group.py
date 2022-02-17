@@ -74,12 +74,12 @@ class ME461Group:
 
         for i in range(7):
           for j in range(7):
-            if((2*i+3) != yonepix) and ((2*j+3) != xonepix):
-                neighborMap[2*i+3,2*j+3] =  newMap[2*i+3,2*j+3]*(0.75*(newMap[2*i+3-2,2*j+3-2] + newMap[2*i+3+2,2*j+3-2] + newMap[2*i+3-2,2*j+3+2] + newMap[2*i+3+2,2*j+3+2]) + newMap[2*i+3,2*j+3-2] + newMap[2*i+3,2*j+3+2] + newMap[2*i+3-2,2*j+3] + newMap[2*i+3+2,2*j+3])
-                distanceMap[2*i+3,2*j+3] = (abs(75+100*i-y) +abs(75+100*j-x))/50
-                Target_map[2*i+3,2*j+3] = (newMap[2*i+3,2*j+3] + 0.05*neighborMap[2*i+3,2*j+3]) / distanceMap[2*i+3,2*j+3]**2
-            else:
-                Target_map[2*i+3,2*j+3] = 0
+            #if((2*i+3) != yonepix) and ((2*j+3) != xonepix):
+            neighborMap[2*i+3,2*j+3] =  newMap[2*i+3,2*j+3]*(0.75*(newMap[2*i+3-2,2*j+3-2] + newMap[2*i+3+2,2*j+3-2] + newMap[2*i+3-2,2*j+3+2] + newMap[2*i+3+2,2*j+3+2]) + newMap[2*i+3,2*j+3-2] + newMap[2*i+3,2*j+3+2] + newMap[2*i+3-2,2*j+3] + newMap[2*i+3+2,2*j+3])
+            distanceMap[2*i+3,2*j+3] = (abs(75+100*i-y) +abs(75+100*j-x))/50
+            Target_map[2*i+3,2*j+3] = (newMap[2*i+3,2*j+3] + 0.05*neighborMap[2*i+3,2*j+3]) / distanceMap[2*i+3,2*j+3]**2
+            #else:
+            #    Target_map[2*i+3,2*j+3] = 0
             for gInd, gName in enumerate(other_groups):
               sum = sum + abs(info[gName][0][0] -(100*i+75)) + abs(info[gName][0][1] -(100*j+75))
             enemy_map[2*i+3,2*j+3] = sum
