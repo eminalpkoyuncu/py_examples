@@ -31,42 +31,42 @@ class ME461Group:
         loc, game_point = info[self.name]
         y,x = loc # get current y,x coordinates
         yonepix,xonepix = y//50+2,x//50+2
-        newMap = np.zeros((19,19),dtype=int)
-        distanceMap = np.zeros((19,19),dtype=int)
-        neighborMap = np.zeros((19,19),dtype=int)
-        enemy_map = np.zeros((19,19))
-        Target_map = np.zeros((19,19))
-        Target_map2 = np.zeros((19,19))
+        newMap = np.zeros((15,15),dtype=int)
+        distanceMap = np.zeros((15,15),dtype=int)
+        neighborMap = np.zeros((15,15),dtype=int)
+        enemy_map = np.zeros((15,15))
+        Target_map = np.zeros((15,15))
+        Target_map2 = np.zeros((15,15))
         for i in range(7):
             for j in range(7):
                 if img[75+100*i,75+100*j,0] == colorz['clr100'][0][0] and img[75+100*i,75+100*j,1] == colorz['clr100'][0][1] and img[75+100*i,75+100*j,2] == colorz['clr100'][0][2]:
-                    newMap[2*i+3,2*j+3] = colorz['clr100'][1]
+                    newMap[2*i+1,2*j+1] = colorz['clr100'][1]
                 elif img[75+100*i,75+100*j,0] == colorz['clr50'][0][0] and img[75+100*i,75+100*j,1] == colorz['clr50'][0][1] and img[75+100*i,75+100*j,2] == colorz['clr50'][0][2]:
-                    newMap[2*i+3,2*j+3] = colorz['clr50'][1]
+                    newMap[2*i+1,2*j+1] = colorz['clr50'][1]
                 elif img[75+100*i,75+100*j,0] == colorz['clr30'][0][0] and img[75+100*i,75+100*j,1] == colorz['clr30'][0][1] and img[75+100*i,75+100*j,2] == colorz['clr30'][0][2]:
-                    newMap[2*i+3,2*j+3] = colorz['clr30'][1]
+                    newMap[2*i+1,2*j+1] = colorz['clr30'][1]
                 elif img[75+100*i,75+100*j,0] == colorz['clr20'][0][0] and img[75+100*i,75+100*j,1] == colorz['clr20'][0][1] and img[75+100*i,75+100*j,2] == colorz['clr20'][0][2]:
-                    newMap[2*i+3,2*j+3] = colorz['clr20'][1]
+                    newMap[2*i+1,2*j+1] = colorz['clr20'][1]
                 elif img[75+100*i,75+100*j,0] == colorz['clr10'][0][0] and img[75+100*i,75+100*j,1] == colorz['clr10'][0][1] and img[75+100*i,75+100*j,2] == colorz['clr10'][0][2]:
-                    newMap[2*i+3,2*j+3] = colorz['clr10'][1]
+                    newMap[2*i+1,2*j+1] = colorz['clr10'][1]
                 elif img[75+100*i,75+100*j,0] == colorz['clr9'][0][0] and img[75+100*i,75+100*j,1] == colorz['clr9'][0][1] and img[75+100*i,75+100*j,2] == colorz['clr9'][0][2]:
-                    newMap[2*i+3,2*j+3] = colorz['clr9'][1]
+                    newMap[2*i+1,2*j+1] = colorz['clr9'][1]
                 elif img[75+100*i,75+100*j,0] == colorz['clr8'][0][0] and img[75+100*i,75+100*j,1] == colorz['clr8'][0][1] and img[75+100*i,75+100*j,2] == colorz['clr8'][0][2]:
-                    newMap[2*i+3,2*j+3] = colorz['clr8'][1]
+                    newMap[2*i+1,2*j+1] = colorz['clr8'][1]
                 elif img[75+100*i,75+100*j,0] == colorz['clr7'][0][0] and img[75+100*i,75+100*j,1] == colorz['clr7'][0][1] and img[75+100*i,75+100*j,2] == colorz['clr7'][0][2]:
-                    newMap[2*i+3,2*j+3] = colorz['clr7'][1]
+                    newMap[2*i+1,2*j+1] = colorz['clr7'][1]
                 elif img[75+100*i,75+100*j,0] == colorz['clr6'][0][0] and img[75+100*i,75+100*j,1] == colorz['clr6'][0][1] and img[75+100*i,75+100*j,2] == colorz['clr6'][0][2]:
-                    newMap[2*i+3,2*j+3] = colorz['clr6'][1]
+                    newMap[2*i+1,2*j+1] = colorz['clr6'][1]
                 elif img[75+100*i,75+100*j,0] == colorz['clr5'][0][0] and img[75+100*i,75+100*j,1] == colorz['clr5'][0][1] and img[75+100*i,75+100*j,2] == colorz['clr5'][0][2]:
-                    newMap[2*i+3,2*j+3] = colorz['clr5'][1]
+                    newMap[2*i+1,2*j+1] = colorz['clr5'][1]
                 elif img[75+100*i,75+100*j,0] == colorz['clr4'][0][0] and img[75+100*i,75+100*j,1] == colorz['clr4'][0][1] and img[75+100*i,75+100*j,2] == colorz['clr4'][0][2]:
-                    newMap[2*i+3,2*j+3] = colorz['clr4'][1]
+                    newMap[2*i+1,2*j+1] = colorz['clr4'][1]
                 elif img[75+100*i,75+100*j,0] == colorz['clr3'][0][0] and img[75+100*i,75+100*j,1] == colorz['clr3'][0][1] and img[75+100*i,75+100*j,2] == colorz['clr3'][0][2]:
-                    newMap[2*i+3,2*j+3] = colorz['clr3'][1]
+                    newMap[2*i+1,2*j+1] = colorz['clr3'][1]
                 elif img[75+100*i,75+100*j,0] == colorz['clr2'][0][0] and img[75+100*i,75+100*j,1] == colorz['clr2'][0][1] and img[75+100*i,75+100*j,2] == colorz['clr2'][0][2]:
-                    newMap[2*i+3,2*j+3] = colorz['clr2'][1]
+                    newMap[2*i+1,2*j+1] = colorz['clr2'][1]
                 elif img[75+100*i,75+100*j,0] == colorz['clr1'][0][0] and img[75+100*i,75+100*j,1] == colorz['clr1'][0][1] and img[75+100*i,75+100*j,2] == colorz['clr1'][0][2]:
-                    newMap[2*i+3,2*j+3] = colorz['clr1'][1]
+                    newMap[2*i+1,2*j+1] = colorz['clr1'][1]
                     
         other_groups = list(info.keys())
         other_groups.remove(self.name)
@@ -74,14 +74,14 @@ class ME461Group:
 
         for i in range(7):
           for j in range(7):
-            neighborMap[2*i+3,2*j+3] =  newMap[2*i+3,2*j+3]*(0.75*(newMap[2*i+3-2,2*j+3-2] + newMap[2*i+3+2,2*j+3-2] + newMap[2*i+3-2,2*j+3+2] + newMap[2*i+3+2,2*j+3+2]) + newMap[2*i+3,2*j+3-2] + newMap[2*i+3,2*j+3+2] + newMap[2*i+3-2,2*j+3] + newMap[2*i+3+2,2*j+3])
-            distanceMap[2*i+3,2*j+3] = (abs(75+100*i-y) +abs(75+100*j-x))/50
-            Target_map[2*i+3,2*j+3] = newMap[2*i+3,2*j+3] / distanceMap[2*i+3,2*j+3]**2
-            Target_map2[2*i+3,2*j+3] = (newMap[2*i+3,2*j+3] + 0.05*neighborMap[2*i+3,2*j+3]) / distanceMap[2*i+3,2*j+3]**2
+            neighborMap[2*i+1,2*j+1] =  newMap[2*i+1,2*j+1]*(0.75*(newMap[2*i+1-2,2*j+1-2] + newMap[2*i+1+2,2*j+1-2] + newMap[2*i+1-2,2*j+1+2] + newMap[2*i+1+2,2*j+1+2]) + newMap[2*i+1,2*j+1-2] + newMap[2*i+1,2*j+1+2] + newMap[2*i+1-2,2*j+1] + newMap[2*i+1+2,2*j+1])
+            distanceMap[2*i+1,2*j+1] = (abs(75+100*i-y) +abs(75+100*j-x))/50
+            Target_map[2*i+1,2*j+1] = newMap[2*i+1,2*j+1] / distanceMap[2*i+1,2*j+1]**2
+            Target_map2[2*i+1,2*j+1] = (newMap[2*i+1,2*j+1] + 0.05*neighborMap[2*i+1,2*j+1]) / distanceMap[2*i+1,2*j+1]**2
             
             for gInd, gName in enumerate(other_groups):
               sum = sum + abs(info[gName][0][0] -(100*i+75)) + abs(info[gName][0][1] -(100*j+75))
-            enemy_map[2*i+3,2*j+3] = sum
+            enemy_map[2*i+1,2*j+1] = sum
             sum = 0
             
         Target_map = np.nan_to_num(Target_map)
@@ -89,7 +89,7 @@ class ME461Group:
         guzel_map = np.zeros((7,7))
         for i in range(7):
             for j in range (7):
-                guzel_map[i,j] = Target_map[2*i+3,2*j+3]
+                guzel_map[i,j] = Target_map[2*i+1,2*j+1]
         np.set_printoptions(precision=2)
 
 
@@ -98,7 +98,7 @@ class ME461Group:
         guzel_map2 = np.zeros((7,7))
         for i in range(7):
             for j in range (7):
-                guzel_map2[i,j] = Target_map2[2*i+3,2*j+3]
+                guzel_map2[i,j] = Target_map2[2*i+1,2*j+1]
         np.set_printoptions(precision=2)
         '''    
         if game_point > 100:
@@ -119,8 +119,8 @@ class ME461Group:
 
             index = np.where(sample == max_neighbour)
 
-            dy = (index[0][0]-np.shape(sample)[0]+3)*50
-            dx = (index[1][0]-np.shape(sample)[1]+3)*50
+            dy = (index[0][0]-np.shape(sample)[0]+1)*50
+            dx = (index[1][0]-np.shape(sample)[1]+1)*50
             xtarget = x + dx
             ytarget = y + dy
 
@@ -167,8 +167,9 @@ def pathfinder(maze,start,end):
                       y = current[j] + i[j]
                  elif j == 1:
                       x = current[j] + i[j]
-                      if maze[y][x] != -1:
-                         neighbours.append([y,x])
+                      if (y < 15) or (y >= 0) or (x < 15) or (x >= 0):
+                         if (maze[y][x] != -1):
+                            neighbours.append([y,x])
         for i in neighbours:
             for j in range(len(i)):
                 if j == 0:
