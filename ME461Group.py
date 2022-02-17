@@ -39,9 +39,7 @@ class ME461Group:
         Target_map2 = np.zeros((19,19))
         for i in range(7):
             for j in range(7):
-                if((2*i+3) == yonepix) and ((2*j+3) == xonepix):
-                    newMap[2*i+3,2*j+3] = 0    
-                elif img[75+100*i,75+100*j,0] == colorz['clr100'][0][0] and img[75+100*i,75+100*j,1] == colorz['clr100'][0][1] and img[75+100*i,75+100*j,2] == colorz['clr100'][0][2]:
+                if img[75+100*i,75+100*j,0] == colorz['clr100'][0][0] and img[75+100*i,75+100*j,1] == colorz['clr100'][0][1] and img[75+100*i,75+100*j,2] == colorz['clr100'][0][2]:
                     newMap[2*i+3,2*j+3] = colorz['clr100'][1]
                 elif img[75+100*i,75+100*j,0] == colorz['clr50'][0][0] and img[75+100*i,75+100*j,1] == colorz['clr50'][0][1] and img[75+100*i,75+100*j,2] == colorz['clr50'][0][2]:
                     newMap[2*i+3,2*j+3] = colorz['clr50'][1]
@@ -76,12 +74,13 @@ class ME461Group:
 
         for i in range(7):
           for j in range(7):
-            #if((2*i+3) != yonepix) and ((2*j+3) != xonepix):
-            neighborMap[2*i+3,2*j+3] =  newMap[2*i+3,2*j+3]*(0.75*(newMap[2*i+3-2,2*j+3-2] + newMap[2*i+3+2,2*j+3-2] + newMap[2*i+3-2,2*j+3+2] + newMap[2*i+3+2,2*j+3+2]) + newMap[2*i+3,2*j+3-2] + newMap[2*i+3,2*j+3+2] + newMap[2*i+3-2,2*j+3] + newMap[2*i+3+2,2*j+3])
-            distanceMap[2*i+3,2*j+3] = (abs(75+100*i-y) +abs(75+100*j-x))/50
-            Target_map[2*i+3,2*j+3] = (newMap[2*i+3,2*j+3] + 0.05*neighborMap[2*i+3,2*j+3]) / distanceMap[2*i+3,2*j+3]**2
-            #else:
-            #    Target_map[2*i+3,2*j+3] = 0
+            if distanceMap[2*i+3,2*j+3] == 0
+                Target_map[2*i+3,2*j+3] = 0
+            else:
+                neighborMap[2*i+3,2*j+3] =  newMap[2*i+3,2*j+3]*(0.75*(newMap[2*i+3-2,2*j+3-2] + newMap[2*i+3+2,2*j+3-2] + newMap[2*i+3-2,2*j+3+2] + newMap[2*i+3+2,2*j+3+2]) + newMap[2*i+3,2*j+3-2] + newMap[2*i+3,2*j+3+2] + newMap[2*i+3-2,2*j+3] + newMap[2*i+3+2,2*j+3])
+                distanceMap[2*i+3,2*j+3] = (abs(75+100*i-y) +abs(75+100*j-x))/50
+                Target_map[2*i+3,2*j+3] = (newMap[2*i+3,2*j+3] + 0.05*neighborMap[2*i+3,2*j+3]) / distanceMap[2*i+3,2*j+3]**2
+                
             for gInd, gName in enumerate(other_groups):
               sum = sum + abs(info[gName][0][0] -(100*i+75)) + abs(info[gName][0][1] -(100*j+75))
             enemy_map[2*i+3,2*j+3] = sum
