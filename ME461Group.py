@@ -139,14 +139,14 @@ def pathfinder(maze,start,end):
 
         neighbours = []
         distances = []
-            for i in neighbour_index:
-                for j in range(len(i)):
-                    if j == 0:
-                         y = current[j] + i[j]
-                    elif j == 1:
-                         x = current[j] + i[j]
-                         if maze[y][x] != -1:
-                            neighbours.append([y,x])
+        for i in neighbour_index:
+             for j in range(len(i)):
+                 if j == 0:
+                      y = current[j] + i[j]
+                 elif j == 1:
+                      x = current[j] + i[j]
+                      if maze[y][x] != -1:
+                         neighbours.append([y,x])
             for i in neighbours:
                 for j in range(len(i)):
                     if j == 0:
