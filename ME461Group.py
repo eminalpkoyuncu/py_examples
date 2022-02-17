@@ -34,9 +34,9 @@ class ME461Group:
         newMap = np.zeros((19,19),dtype=int)
         distanceMap = np.zeros((19,19),dtype=int)
         neighborMap = np.zeros((19,19),dtype=int)
-        enemy_map = np.zeros((19,19))
-        Target_map = np.zeros((19,19))
-        Target_map2 = np.zeros((19,19))
+        enemy_map = np.zeros((19,19),dtype=int)
+        Target_map = np.zeros((19,19),dtype=int)
+        Target_map2 = np.zeros((19,19),dtype=int)
         for i in range(7):
             for j in range(7):
                 if img[75+100*i,75+100*j,0] == colorz['clr100'][0][0] and img[75+100*i,75+100*j,1] == colorz['clr100'][0][1] and img[75+100*i,75+100*j,2] == colorz['clr100'][0][2]:
@@ -82,8 +82,8 @@ class ME461Group:
               
             Target_map[2*i+3,2*j+3] = (newMap[2*i+3,2*j+3] + 0.05*neighborMap[2*i+3,2*j+3]) / distanceMap[2*i+3,2*j+3]**2
         for gInd, gName in enumerate(other_groups):
-          enm_x = aGame.GenerateInfo(Players)[gName][0][1]//50+2
-          enm_y = aGame.GenerateInfo(Players)[gName][0][0]//50+2
+          enm_x = info[gName][0][1]//50+2
+          enm_y = info[gName][0][0]//50+2
           enemy_map[enm_x+1,enm_y] += 2 
           enemy_map[enm_x-1,enm_y] += 2 
           enemy_map[enm_x,enm_y+1] += 2 
