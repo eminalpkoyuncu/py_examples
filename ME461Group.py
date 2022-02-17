@@ -144,13 +144,13 @@ class ME461Group:
         xtarget = x + dx
         ytarget = y + dy
         if ytarget <= 0:
-            dy = 50
+            dy = 10
         if ytarget >= 750:
-            dy = -50
+            dy = -10
         if xtarget <= 0:
-            dx = 50
+            dx = 10
         if xtarget >= 750:
-            dx = -50
+            dx = -10
 
         xtarget = x + dx
         ytarget = y + dy
