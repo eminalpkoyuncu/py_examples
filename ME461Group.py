@@ -30,7 +30,7 @@ class ME461Group:
         imS = img.shape[0] # assume square image and get size
         loc, game_point = info[self.name]
         y,x = loc # get current y,x coordinates
-        yonepix,xonepix = y//50+2,x//50+2
+        yonepix,xonepix = y//50,x//50
         newMap = np.zeros((15,15),dtype=int)
         distanceMap = np.zeros((15,15),dtype=int)
         neighborMap = np.zeros((15,15),dtype=int)
