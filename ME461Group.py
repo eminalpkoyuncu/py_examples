@@ -139,28 +139,13 @@ class ME461Group:
 
         index = np.where(sample == max_neighbour)
 
-        dy = (index[0][0]-yonepix)*50
-        dx = (index[1][0]-xonepix)*50
-        xtarget = x + dx
-        ytarget = y + dy
-        if ytarget <= 0:
-            dy = 10
-        if ytarget >= 750:
-            dy = -10
-        if xtarget <= 0:
-            dx = 10
-        if xtarget >= 750:
-            dx = -10
-
-        xtarget = x + dx
-        ytarget = y + dy
         coords = pathfinder(sample,[yonepix,xonepix],[index[0][0],index[1][0]])
         coordslist = []
         for i in coords:
           new_list = [(j * 50)-75 for j in i ]
           coordslist.append(list(new_list))
-
-
+        
+        
         return coordslist
 
 
