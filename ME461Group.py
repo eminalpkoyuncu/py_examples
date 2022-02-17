@@ -74,7 +74,7 @@ class ME461Group:
 
         for i in range(7):
           for j in range(7):
-            if distanceMap[2*i+3,2*j+3] == 0
+            if distanceMap[2*i+3,2*j+3] == 0:
                 Target_map[2*i+3,2*j+3] = 0
             else:
                 neighborMap[2*i+3,2*j+3] =  newMap[2*i+3,2*j+3]*(0.75*(newMap[2*i+3-2,2*j+3-2] + newMap[2*i+3+2,2*j+3-2] + newMap[2*i+3-2,2*j+3+2] + newMap[2*i+3+2,2*j+3+2]) + newMap[2*i+3,2*j+3-2] + newMap[2*i+3,2*j+3+2] + newMap[2*i+3-2,2*j+3] + newMap[2*i+3+2,2*j+3])
