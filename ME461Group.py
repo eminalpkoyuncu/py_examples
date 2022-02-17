@@ -172,5 +172,5 @@ def pathfinder(maze,start,end):
         if stepcounter < 2:
             current = neighbours[distances.index(min(distances))]
             path.append(current)
-
+        stepcounter = stepcounter + 1
     return path
