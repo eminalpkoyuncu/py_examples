@@ -68,7 +68,7 @@ class ME461Group:
                 elif img[75+100*i,75+100*j,0] == colorz['clr1'][0][0] and img[75+100*i,75+100*j,1] == colorz['clr1'][0][1] and img[75+100*i,75+100*j,2] == colorz['clr1'][0][2]:
                     newMap[2*i+3,2*j+3] = colorz['clr1'][1]
                     
-        other_groups = info.keys()
+        other_groups = list(info.keys())
         other_groups.remove(self.name)
         sum = 0
 
