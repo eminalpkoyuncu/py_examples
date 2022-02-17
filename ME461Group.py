@@ -67,7 +67,7 @@ class ME461Group:
                     newMap[2*i+3,2*j+3] = colorz['clr2'][1]
                 elif img[75+100*i,75+100*j,0] == colorz['clr1'][0][0] and img[75+100*i,75+100*j,1] == colorz['clr1'][0][1] and img[75+100*i,75+100*j,2] == colorz['clr1'][0][2]:
                     newMap[2*i+3,2*j+3] = colorz['clr1'][1]
-        other_groups = ['atlas','backspacex','ducati','hepsi1','meturoam','nebula','ohmygroup','tulumba']
+        #other_groups = ['atlas','backspacex','ducati','hepsi1','meturoam','nebula','ohmygroup','tulumba']
         sum = 0
 
         for i in range(7):
@@ -76,11 +76,12 @@ class ME461Group:
             distanceMap[2*i+3,2*j+3] = (abs(75+100*i-y) +abs(75+100*j-x))/50
             Target_map[2*i+3,2*j+3] = newMap[2*i+3,2*j+3] / distanceMap[2*i+3,2*j+3]**2
             Target_map2[2*i+3,2*j+3] = (newMap[2*i+3,2*j+3] + 0.1*neighborMap[2*i+3,2*j+3]) / distanceMap[2*i+3,2*j+3]**2
+            '''
             for gInd, gName in enumerate(other_groups):
               sum = sum + abs(info[gName][0][0] -(100*i+75)) + abs(info[gName][0][1] -(100*j+75))
             enemy_map[2*i+3,2*j+3] = sum
             sum = 0
-
+            '''
         Target_map = np.nan_to_num(Target_map)
         Target_map = np.where(Target_map > 999999, 0, Target_map)
         guzel_map = np.zeros((7,7))
