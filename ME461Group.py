@@ -31,9 +31,12 @@ class ME461Group:
         loc, game_point = info[self.name]
         y,x = loc # get current y,x coordinates
         yonepix,xonepix = y//50+2,x//50+2
-        # a very simple randomizer
-        maxL = self.maxStep # total travel
         newMap = np.zeros((19,19),dtype=int)
+        distanceMap = np.zeros((19,19),dtype=int)
+        neighborMap = np.zeros((19,19),dtype=int)
+        enemy_map = np.zeros((19,19))
+        Target_map = np.zeros((19,19))
+        Target_map2 = np.zeros((19,19))
         for i in range(7):
             for j in range(7):
                 if img[75+100*i,75+100*j,0] == colorz['clr100'][0][0] and img[75+100*i,75+100*j,1] == colorz['clr100'][0][1] and img[75+100*i,75+100*j,2] == colorz['clr100'][0][2]:
@@ -64,7 +67,37 @@ class ME461Group:
                     newMap[2*i+3,2*j+3] = colorz['clr2'][1]
                 elif img[75+100*i,75+100*j,0] == colorz['clr1'][0][0] and img[75+100*i,75+100*j,1] == colorz['clr1'][0][1] and img[75+100*i,75+100*j,2] == colorz['clr1'][0][2]:
                     newMap[2*i+3,2*j+3] = colorz['clr1'][1]
+        other_groups = ['atlas','backspacex','ducati','hepsi1','meturoam','nebula','ohmygroup','tulumba']
+        sum = 0
 
+        for i in range(7):
+          for j in range(7):
+            neighborMap[2*i+3,2*j+3] =  0.75*(newMap[2*i+3-2,2*j+3-2] + newMap[2*i+3+2,2*j+3-2] + newMap[2*i+3-2,2*j+3+2] + newMap[2*i+3+2,2*j+3+2]) + newMap[2*i+3,2*j+3-2] + newMap[2*i+3,2*j+3+2] + newMap[2*i+3-2,2*j+3] + newMap[2*i+3+2,2*j+3]
+            distanceMap[2*i+3,2*j+3] = (abs(75+100*i-y) +abs(75+100*j-x))/50
+            Target_map[2*i+3,2*j+3] = newMap[2*i+3,2*j+3] / distanceMap[2*i+3,2*j+3]**2
+            Target_map2[2*i+3,2*j+3] = (newMap[2*i+3,2*j+3] + 0.1*neighborMap[2*i+3,2*j+3]) / distanceMap[2*i+3,2*j+3]**2
+            for gInd, gName in enumerate(other_groups):
+              sum = sum + abs(info[gName][0][0] -(100*i+75)) + abs(info[gName][0][1] -(100*j+75))
+            enemy_map[2*i+3,2*j+3] = sum
+            sum = 0
+
+        Target_map = np.nan_to_num(Target_map)
+        Target_map = np.where(Target_map > 999999, 0, Target_map)
+        guzel_map = np.zeros((7,7))
+        for i in range(7):
+            for j in range (7):
+                guzel_map[i,j] = Target_map[2*i+3,2*j+3]
+        np.set_printoptions(precision=2)
+
+
+        Target_map2 = np.nan_to_num(Target_map2)
+        Target_map2 = np.where(Target_map2 > 999999, 0, Target_map2)
+        guzel_map2 = np.zeros((7,7))
+        for i in range(7):
+            for j in range (7):
+                guzel_map2[i,j] = Target_map2[2*i+3,2*j+3]
+        np.set_printoptions(precision=2)
+        '''    
         if game_point > 100:
             num_neighbor = 2
 
@@ -93,37 +126,38 @@ class ME461Group:
                 ytarget = 375
             coordslist = [[y,xtarget],[ytarget,xtarget]]
         else:
-            sample = newMap
-            sample[0,0], sample[np.shape(sample)[0]-3,np.shape(sample)[1]-3], sample[0,np.shape(sample)[1]-1], sample[np.shape(sample)[0]-1,0], sample[np.shape(sample)[0]-1,np.shape(sample)[1]-1] = 0, 0, 0, 0, 0
+        '''
+        sample = Target_map2
+        sample[0,0], sample[np.shape(sample)[0]-3,np.shape(sample)[1]-3], sample[0,np.shape(sample)[1]-1], sample[np.shape(sample)[0]-1,0], sample[np.shape(sample)[0]-1,np.shape(sample)[1]-1] = 0, 0, 0, 0, 0
 
-            sample = np.where(sample > game_point, -1, sample)
-            max_neighbour = np.max(sample)
+        sample = np.where(sample > game_point, -1, sample)
+        max_neighbour = np.max(sample)
 
 
-            index = np.where(sample == max_neighbour)
+        index = np.where(sample == max_neighbour)
 
-            dy = (index[0][0]-yonepix)*50
-            dx = (index[1][0]-xonepix)*50
-            xtarget = x + dx
-            ytarget = y + dy
-            if ytarget <= 0:
-                dy = 50
-            if ytarget >= 750:
-                dy = -50
-            if xtarget <= 0:
-                dx = 50
-            if xtarget >= 750:
-                dx = -50
+        dy = (index[0][0]-yonepix)*50
+        dx = (index[1][0]-xonepix)*50
+        xtarget = x + dx
+        ytarget = y + dy
+        if ytarget <= 0:
+            dy = 50
+        if ytarget >= 750:
+            dy = -50
+        if xtarget <= 0:
+            dx = 50
+        if xtarget >= 750:
+            dx = -50
 
-            xtarget = x + dx
-            ytarget = y + dy
-            coords = pathfinder(sample,[yonepix,xonepix],[index[0][0],index[1][0]])
-            coordslist = []
-            for i in coords:
-              new_list = [(j * 50)-75 for j in i ]
-              coordslist.append(list(new_list))
-            
-            
+        xtarget = x + dx
+        ytarget = y + dy
+        coords = pathfinder(sample,[yonepix,xonepix],[index[0][0],index[1][0]])
+        coordslist = []
+        for i in coords:
+          new_list = [(j * 50)-75 for j in i ]
+          coordslist.append(list(new_list))
+
+
         return coordslist
 
 
@@ -159,3 +193,4 @@ def pathfinder(maze,start,end):
             path.append(current)
 
     return path
+
