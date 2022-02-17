@@ -156,8 +156,8 @@ def pathfinder(maze,start,end):
     neighbour_index = [[0,1],[1,0],[0,-1],[-1,0]]
     path = [start]
     while current != end:
-        #if stepcounter == 2:
-        #    break
+        if stepcounter == 2:
+            break
 
         neighbours = []
         distances = []
@@ -167,7 +167,7 @@ def pathfinder(maze,start,end):
                       y = current[j] + i[j]
                  elif j == 1:
                       x = current[j] + i[j]
-                      if (y < 15) and (y >= 0) and (x < 15) and (x >= 0):
+                      if (y < 14) and (y >= 1) and (x < 14) and (x >= 1):
                          if (maze[y][x] != -1):
                             neighbours.append([y,x])
         for i in neighbours:
@@ -177,9 +177,9 @@ def pathfinder(maze,start,end):
                 elif j == 1:
                     xdistance = abs(end[j]-i[j])
                     distances.append(ydistance + xdistance)
-        #if stepcounter < 2:
-        current = neighbours[distances.index(min(distances))]
-        path.append(current)
+        if stepcounter < 2:
+            current = neighbours[distances.index(min(distances))]
+            path.append(current)
 
     return path
 
