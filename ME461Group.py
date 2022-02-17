@@ -74,10 +74,10 @@ class ME461Group:
 
         for i in range(7):
           for j in range(7):
-            neighborMap[2*i+1,2*j+1] =  newMap[2*i+1,2*j+1]*(0.75*(newMap[2*i+1-2,2*j+1-2] + newMap[2*i+1+2,2*j+1-2] + newMap[2*i+1-2,2*j+1+2] + newMap[2*i+1+2,2*j+1+2]) + newMap[2*i+1,2*j+1-2] + newMap[2*i+1,2*j+1+2] + newMap[2*i+1-2,2*j+1] + newMap[2*i+1+2,2*j+1])
+            #neighborMap[2*i+1,2*j+1] =  newMap[2*i+1,2*j+1]*(0.75*(newMap[2*i+1-2,2*j+1-2] + newMap[2*i+1+2,2*j+1-2] + newMap[2*i+1-2,2*j+1+2] + newMap[2*i+1+2,2*j+1+2]) + newMap[2*i+1,2*j+1-2] + newMap[2*i+1,2*j+1+2] + newMap[2*i+1-2,2*j+1] + newMap[2*i+1+2,2*j+1])
             distanceMap[2*i+1,2*j+1] = (abs(75+100*i-y) +abs(75+100*j-x))/50
             Target_map[2*i+1,2*j+1] = newMap[2*i+1,2*j+1] / distanceMap[2*i+1,2*j+1]**2
-            Target_map2[2*i+1,2*j+1] = (newMap[2*i+1,2*j+1] + 0.05*neighborMap[2*i+1,2*j+1]) / distanceMap[2*i+1,2*j+1]**2
+            #Target_map2[2*i+1,2*j+1] = (newMap[2*i+1,2*j+1] + 0.05*neighborMap[2*i+1,2*j+1]) / distanceMap[2*i+1,2*j+1]**2
             
             for gInd, gName in enumerate(other_groups):
               sum = sum + abs(info[gName][0][0] -(100*i+75)) + abs(info[gName][0][1] -(100*j+75))
