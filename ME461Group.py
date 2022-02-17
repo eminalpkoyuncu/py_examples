@@ -129,10 +129,14 @@ class ME461Group:
 
 
 def pathfinder(maze,start,end):
+    stepcounter = 0
     current = start
     neighbour_index = [[0,1],[1,0],[0,-1],[-1,0]]
     path = [start]
     while current != end:
+      if stepcounter == 2:
+        break
+      
       neighbours = []
       distances = []
       for i in neighbour_index:
@@ -150,6 +154,8 @@ def pathfinder(maze,start,end):
               elif j == 1:
                   xdistance = abs(end[j]-i[j])
                   distances.append(ydistance + xdistance)
-      current = neighbours[distances.index(min(distances))]
-      path.append(current)
+      if stepcounter < 2
+        current = neighbours[distances.index(min(distances))]
+        path.append(current)
+        
     return path
