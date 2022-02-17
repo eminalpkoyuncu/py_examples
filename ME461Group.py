@@ -142,7 +142,7 @@ class ME461Group:
         coords = pathfinder(sample,[yonepix,xonepix],[index[0][0],index[1][0]])
         coordslist = []
         for i in coords:
-          new_list = [(j * 50)-75 for j in i ]
+          new_list = [(j * 50)+25 for j in i ]
           coordslist.append(list(new_list))
         
         
