@@ -101,7 +101,7 @@ class ME461Group:
           enemy_map[enm_x-2,enm_y+2] += 0.5 
           enemy_map[enm_x-2,enm_y-2] += 0.5 
             
-        Target_map = np.multiply(Target_map, 0.1*enemy_map) + Target_map   
+        Target_map = -np.multiply(Target_map, 0.1*enemy_map) + Target_map   
         Target_map = np.nan_to_num(Target_map)
         Target_map = np.where(Target_map > 999999, 0, Target_map)
 
