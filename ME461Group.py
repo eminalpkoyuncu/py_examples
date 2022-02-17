@@ -134,28 +134,28 @@ def pathfinder(maze,start,end):
     neighbour_index = [[0,1],[1,0],[0,-1],[-1,0]]
     path = [start]
     while current != end:
-      if stepcounter == 2:
-        break
-      
-      neighbours = []
-      distances = []
-      for i in neighbour_index:
-          for j in range(len(i)):
-              if j == 0:
-                y = current[j] + i[j]
-              elif j == 1:
-                x = current[j] + i[j]
-                if maze[y][x] != -1:
-                  neighbours.append([y,x])
-      for i in neighbours:
-          for j in range(len(i)):
-              if j == 0:
-                  ydistance = abs(end[j]-i[j])
-              elif j == 1:
-                  xdistance = abs(end[j]-i[j])
-                  distances.append(ydistance + xdistance)
-      if stepcounter < 2:
-        current = neighbours[distances.index(min(distances))]
-        path.append(current)
-        
+        if stepcounter == 2:
+            break
+
+        neighbours = []
+        distances = []
+            for i in neighbour_index:
+                for j in range(len(i)):
+                    if j == 0:
+                         y = current[j] + i[j]
+                    elif j == 1:
+                         x = current[j] + i[j]
+                         if maze[y][x] != -1:
+                            neighbours.append([y,x])
+            for i in neighbours:
+                for j in range(len(i)):
+                    if j == 0:
+                        ydistance = abs(end[j]-i[j])
+                    elif j == 1:
+                        xdistance = abs(end[j]-i[j])
+                        distances.append(ydistance + xdistance)
+            if stepcounter < 2:
+                current = neighbours[distances.index(min(distances))]
+                path.append(current)
+
     return path
