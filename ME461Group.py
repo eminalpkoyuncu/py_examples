@@ -131,7 +131,7 @@ class ME461Group:
         sample = Target_map2
         sample[0,0], sample[np.shape(sample)[0]-3,np.shape(sample)[1]-3], sample[0,np.shape(sample)[1]-1], sample[np.shape(sample)[0]-1,0], sample[np.shape(sample)[0]-1,np.shape(sample)[1]-1] = 0, 0, 0, 0, 0
 
-        sample = np.where(sample > game_point, -1, sample)
+        sample = np.where(newMap > game_point, -1, Target_map2)
         max_neighbour = np.max(sample)
 
 
