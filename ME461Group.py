@@ -81,11 +81,27 @@ class ME461Group:
                 distanceMap[2*i+3,2*j+3]=9999
               
             Target_map[2*i+3,2*j+3] = (newMap[2*i+3,2*j+3] + 0.05*neighborMap[2*i+3,2*j+3]) / distanceMap[2*i+3,2*j+3]**2
-                
-            for gInd, gName in enumerate(other_groups):
-              sum = sum + abs(info[gName][0][0] -(100*i+75)) + abs(info[gName][0][1] -(100*j+75))
-            enemy_map[2*i+3,2*j+3] = sum
-            sum = 0
+        for gInd, gName in enumerate(other_groups):
+          enm_x = aGame.GenerateInfo(Players)[gName][0][1]//50+2
+          enm_y = aGame.GenerateInfo(Players)[gName][0][0]//50+2
+          enemy_map[enm_x+1,enm_y] += 2 
+          enemy_map[enm_x-1,enm_y] += 2 
+          enemy_map[enm_x,enm_y+1] += 2 
+          enemy_map[enm_x,enm_y-1] += 2 
+          enemy_map[enm_x+1,enm_y+1] += 1
+          enemy_map[enm_x+1,enm_y-1] += 1 
+          enemy_map[enm_x-1,enm_y+1] += 1 
+          enemy_map[enm_x-1,enm_y-1] += 1 
+          enemy_map[enm_x+2,enm_y] += 1 
+          enemy_map[enm_x-2,enm_y] += 1 
+          enemy_map[enm_x,enm_y+2] += 1 
+          enemy_map[enm_x,enm_y-2] += 1 
+          enemy_map[enm_x+2,enm_y+2] += 0.5
+          enemy_map[enm_x+2,enm_y-2] += 0.5 
+          enemy_map[enm_x-2,enm_y+2] += 0.5 
+          enemy_map[enm_x-2,enm_y-2] += 0.5 
+            
+        Target_map = np.multiply(Target_map, 0.1*enemy_map) + Target_map   
         Target_map = np.nan_to_num(Target_map)
         Target_map = np.where(Target_map > 999999, 0, Target_map)
 
