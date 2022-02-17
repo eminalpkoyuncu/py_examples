@@ -167,7 +167,7 @@ def pathfinder(maze,start,end):
                       y = current[j] + i[j]
                  elif j == 1:
                       x = current[j] + i[j]
-                      if (y < 15) or (y >= 0) or (x < 15) or (x >= 0):
+                      if (y < 15) and (y >= 0) and (x < 15) and (x >= 0):
                          if (maze[y][x] != -1):
                             neighbours.append([y,x])
         for i in neighbours:
