@@ -147,15 +147,15 @@ def pathfinder(maze,start,end):
                       x = current[j] + i[j]
                       if maze[y][x] != -1:
                          neighbours.append([y,x])
-            for i in neighbours:
-                for j in range(len(i)):
-                    if j == 0:
-                        ydistance = abs(end[j]-i[j])
-                    elif j == 1:
-                        xdistance = abs(end[j]-i[j])
-                        distances.append(ydistance + xdistance)
-            if stepcounter < 2:
-                current = neighbours[distances.index(min(distances))]
-                path.append(current)
+        for i in neighbours:
+            for j in range(len(i)):
+                if j == 0:
+                    ydistance = abs(end[j]-i[j])
+                elif j == 1:
+                    xdistance = abs(end[j]-i[j])
+                    distances.append(ydistance + xdistance)
+        if stepcounter < 2:
+            current = neighbours[distances.index(min(distances))]
+            path.append(current)
 
     return path
