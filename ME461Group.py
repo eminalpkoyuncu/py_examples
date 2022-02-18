@@ -37,6 +37,7 @@ class ME461Group:
         enemy_map = np.zeros((19,19))
         Target_map = np.zeros((19,19))
         Target_map2 = np.zeros((19,19))
+        Finisher_map = np.zeros((19,19))
         for i in range(7):
             for j in range(7):
                 if img[75+100*i,75+100*j,0] == colorz['clr100'][0][0] and img[75+100*i,75+100*j,1] == colorz['clr100'][0][1] and img[75+100*i,75+100*j,2] == colorz['clr100'][0][2]:
@@ -75,8 +76,10 @@ class ME461Group:
         for i in range(7):
           for j in range(7):
             neighborMap[2*i+3,2*j+3] =  newMap[2*i+3,2*j+3]*(0.75*(newMap[2*i+3-2,2*j+3-2] + newMap[2*i+3+2,2*j+3-2] + newMap[2*i+3-2,2*j+3+2] + newMap[2*i+3+2,2*j+3+2]) + newMap[2*i+3,2*j+3-2] + newMap[2*i+3,2*j+3+2] + newMap[2*i+3-2,2*j+3] + newMap[2*i+3+2,2*j+3])
-            distanceMap[2*i+3,2*j+3] = (abs(75+100*i-y) +abs(75+100*j-x))/50           
-            Target_map[2*i+3,2*j+3] = (newMap[2*i+3,2*j+3] + 0.05*neighborMap[2*i+3,2*j+3]) / distanceMap[2*i+3,2*j+3]**2
+            distanceMap[2*i+3,2*j+3] = (abs(75+100*i-y) +abs(75+100*j-x))/50
+            Finisher_map[2i+3,2j+3] = game_point - newMap[2i+3,2j+3]
+            Target_map[2*i+3,2*j+3] = (newMap[2*i+3,2*j+3] + 0.05*neighborMap[2*i+3,2*j+3]) / (distanceMap[2*i+3,2*j+3]**2)
+            Target_map2[2*i+3,2*j+3] = (newMap[2*i+3,2*j+3] + 0.05*neighborMap[2*i+3,2*j+3]) / Finisher_map[2i+3,2j+3]
             
         for gInd, gName in enumerate(other_groups):
           enm_x = info[gName][0][1]//50+2
@@ -101,6 +104,7 @@ class ME461Group:
         Target_map = -np.multiply(Target_map, 0.1*enemy_map) + Target_map   
         Target_map = np.nan_to_num(Target_map)
         Target_map = np.where(Target_map > 999999, 0, Target_map)
+        Target_map = Target_map + Target_map2
 
         '''    
         if game_point > 100:
