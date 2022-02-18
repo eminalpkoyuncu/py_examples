@@ -31,12 +31,12 @@ class ME461Group:
         loc, game_point = info[self.name]
         y,x = loc # get current y,x coordinates
         yonepix,xonepix = y//50+2,x//50+2
-        newMap = np.zeros((19,19),dtype=int)
-        distanceMap = np.zeros((19,19),dtype=int)
-        neighborMap = np.zeros((19,19),dtype=int)
-        enemy_map = np.zeros((19,19),dtype=int)
-        Target_map = np.zeros((19,19),dtype=int)
-        Target_map2 = np.zeros((19,19),dtype=int)
+        newMap = np.zeros((19,19))
+        distanceMap = np.zeros((19,19))
+        neighborMap = np.zeros((19,19))
+        enemy_map = np.zeros((19,19))
+        Target_map = np.zeros((19,19))
+        Target_map2 = np.zeros((19,19))
         for i in range(7):
             for j in range(7):
                 if img[75+100*i,75+100*j,0] == colorz['clr100'][0][0] and img[75+100*i,75+100*j,1] == colorz['clr100'][0][1] and img[75+100*i,75+100*j,2] == colorz['clr100'][0][2]:
