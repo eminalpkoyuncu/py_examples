@@ -77,7 +77,7 @@ class ME461Group:
           for j in range(7):
             neighborMap[2*i+3,2*j+3] =  newMap[2*i+3,2*j+3]*(0.75*(newMap[2*i+3-2,2*j+3-2] + newMap[2*i+3+2,2*j+3-2] + newMap[2*i+3-2,2*j+3+2] + newMap[2*i+3+2,2*j+3+2]) + newMap[2*i+3,2*j+3-2] + newMap[2*i+3,2*j+3+2] + newMap[2*i+3-2,2*j+3] + newMap[2*i+3+2,2*j+3])
             distanceMap[2*i+3,2*j+3] = (abs(75+100*i-y) +abs(75+100*j-x))/50
-            Finisher_map[2i+3,2j+3] = game_point - newMap[2i+3,2j+3]
+            Finisher_map[2*i+3,2*j+3] = game_point - newMap[2*i+3,2*j+3]
             Target_map[2*i+3,2*j+3] = (newMap[2*i+3,2*j+3] + 0.05*neighborMap[2*i+3,2*j+3]) / (distanceMap[2*i+3,2*j+3]**2)
             Target_map2[2*i+3,2*j+3] = (newMap[2*i+3,2*j+3] + 0.05*neighborMap[2*i+3,2*j+3]) / Finisher_map[2i+3,2j+3]
             
